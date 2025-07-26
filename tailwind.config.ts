@@ -18,6 +18,11 @@ export default {
 			}
 		},
 		extend: {
+			fontFamily: {
+				'cursive': ['Dancing Script', 'cursive'],
+				'mono': ['JetBrains Mono', 'monospace'],
+				'sans': ['Inter', 'system-ui', 'sans-serif'],
+			},
 			colors: {
 				border: 'hsl(var(--border))',
 				input: 'hsl(var(--input))',
@@ -52,6 +57,17 @@ export default {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
 				},
+				// Theme-specific colors
+				'designer-pink': 'hsl(var(--designer-pink))',
+				'designer-blue': 'hsl(var(--designer-blue))',
+				'designer-purple': 'hsl(var(--designer-purple))',
+				'designer-yellow': 'hsl(var(--designer-yellow))',
+				'designer-green': 'hsl(var(--designer-green))',
+				'coder-green': 'hsl(var(--coder-green))',
+				'coder-blue': 'hsl(var(--coder-blue))',
+				'coder-yellow': 'hsl(var(--coder-yellow))',
+				'coder-purple': 'hsl(var(--coder-purple))',
+				'coder-red': 'hsl(var(--coder-red))',
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
 					foreground: 'hsl(var(--sidebar-foreground))',
