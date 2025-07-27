@@ -24,39 +24,83 @@ export const ThemeToggle = ({ className = '' }: ThemeToggleProps) => {
   };
 
   return (
-    <button
-      onClick={toggleTheme}
-      className={`
-        relative w-16 h-8 rounded-full border-2 border-border
-        transition-all duration-300 ease-in-out
-        ${isDark ? 'bg-card' : 'bg-secondary'}
-        hover:scale-105 bookmark-shadow
-        ${className}
-      `}
-      aria-label={`Switch to ${isDark ? 'designer' : 'coder'} mode`}
-    >
-      <div
+    <div className={`relative ${className}`}>
+      <button
+        onClick={toggleTheme}
         className={`
-          absolute top-1 w-6 h-6 rounded-full
-          transition-all duration-300 ease-in-out
-          ${isDark ? 'translate-x-8 bg-coder-green' : 'translate-x-1 bg-designer-pink'}
-          flex items-center justify-center
+          relative w-56 h-20 rounded-full border border-border
+          transition-all duration-500 ease-out
+          bg-muted hover:scale-105 bookmark-shadow
+          flex items-center justify-between
+          overflow-hidden
+          group
         `}
+        aria-label={`Switch to ${isDark ? 'designer' : 'coder'} mode`}
       >
-        {isDark ? (
-          <Moon className="w-3 h-3 text-background" />
-        ) : (
-          <Sun className="w-3 h-3 text-primary-foreground" />
-        )}
-      </div>
-      <div className="absolute inset-0 flex items-center justify-between px-2">
-        <span className={`text-xs font-mono ${!isDark ? 'text-foreground' : 'text-muted-foreground'}`}>
-          D
-        </span>
-        <span className={`text-xs font-mono ${isDark ? 'text-foreground' : 'text-muted-foreground'}`}>
-          C
-        </span>
-      </div>
-    </button>
+        {/* Sliding Background Indicator */}
+        <div className={`
+          absolute top-2 h-16 w-28
+          transition-all duration-500 ease-out
+          rounded-full shadow-sm
+          ${isDark 
+            ? 'bg-white border border-border translate-x-28' 
+            : 'bg-designer-pink border border-designer-pink translate-x-0'
+          }
+        `} />
+
+        {/* Designer Mode (Left Side) */}
+        <div className={`
+          relative z-10 h-full w-1/2
+          flex flex-col items-center justify-center
+          transition-all duration-500 ease-out
+          ${!isDark ? 'text-white' : 'text-foreground'}
+        `}>
+          <div className={`
+            text-xs font-medium
+            transition-all duration-500 ease-out
+            ${!isDark ? 'scale-110' : 'scale-100'}
+            text-center
+          `}>
+            <div>The <span className="font-bold italic">designer</span></div>
+            <div>mode</div>
+          </div>
+          <Sun className={`
+            w-4 h-4 mt-1
+            transition-all duration-500 ease-out
+            ${!isDark ? 'scale-110 rotate-12' : 'scale-100 rotate-0'}
+          `} />
+        </div>
+
+        {/* Coder Mode (Right Side) */}
+        <div className={`
+          relative z-10 h-full w-1/2
+          flex flex-col items-center justify-center
+          transition-all duration-500 ease-out
+          ${isDark ? 'text-black' : 'text-foreground'}
+        `}>
+          <div className={`
+            text-xs font-medium
+            transition-all duration-500 ease-out
+            ${isDark ? 'scale-110' : 'scale-100'}
+            text-center
+          `}>
+            <div>The <span className="font-bold font-mono">&lt;coder&gt;</span></div>
+            <div>mode</div>
+          </div>
+          <Moon className={`
+            w-4 h-4 mt-1
+            transition-all duration-500 ease-out
+            ${isDark ? 'scale-110 -rotate-12' : 'scale-100 rotate-0'}
+          `} />
+        </div>
+
+        {/* Hover Effects */}
+        <div className={`
+          absolute inset-0 bg-gradient-to-r from-transparent via-white/5 to-transparent
+          opacity-0 group-hover:opacity-100
+          transition-opacity duration-300 ease-out
+        `} />
+      </button>
+    </div>
   );
 };

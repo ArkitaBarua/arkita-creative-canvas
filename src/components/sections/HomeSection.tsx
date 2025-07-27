@@ -1,3 +1,4 @@
+
 import { HeroBookmark } from '../HeroBookmark';
 
 interface HomeSectionProps {
@@ -6,7 +7,7 @@ interface HomeSectionProps {
 
 export const HomeSection = ({ isDark }: HomeSectionProps) => {
   return (
-    <section className="min-h-screen flex items-center justify-center relative overflow-hidden">
+    <section className="min-h-screen flex items-start justify-center relative overflow-hidden pt-16 border-t-4 border-r-4 border-border">
       {/* Interactive Background */}
       <div className={`
         absolute inset-0 
@@ -22,17 +23,17 @@ export const HomeSection = ({ isDark }: HomeSectionProps) => {
         </>
       )}
       
+      {/* Hero Bookmark - Top Left */}
+      <div className="absolute top-0 left-0 z-20">
+        <HeroBookmark isDark={isDark} />
+      </div>
+
       {/* Content Container */}
-      <div className="relative z-10 max-w-6xl mx-auto px-8 flex items-center gap-16">
-        {/* Hero Bookmark */}
-        <div className="flex-shrink-0">
-          <HeroBookmark isDark={isDark} />
-        </div>
-        
+      <div className="relative z-10 max-w-7xl mx-auto px-8 flex items-start justify-end min-h-screen pt-0">
         {/* Main Content */}
-        <div className="flex-1 max-w-2xl">
+        <div className="flex-1 max-w-2xl ml-56 mr-0 mt-8">
           <h1 className={`
-            text-6xl font-bold mb-6 leading-tight
+            text-4xl font-bold mb-6 leading-tight
             ${isDark 
               ? 'font-mono text-coder-green' 
               : 'font-cursive text-designer-pink'

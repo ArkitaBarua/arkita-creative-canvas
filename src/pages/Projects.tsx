@@ -2,9 +2,9 @@ import { useState, useEffect } from 'react';
 import { ThemeToggle } from '../components/ThemeToggle';
 import { BookmarkNavigation } from '../components/BookmarkNavigation';
 import { SocialsDropdown } from '../components/SocialsDropdown';
-import { HomeSection } from '../components/sections/HomeSection';
+import { ProjectsSection } from '../components/sections/ProjectsSection';
 
-const Index = () => {
+const Projects = () => {
   const [isDark, setIsDark] = useState(false);
 
   // Monitor theme changes
@@ -25,9 +25,19 @@ const Index = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-background border-frame relative p-2 m-4">
+    <div className="min-h-screen bg-background border-frame relative p-8 m-4">
       {/* Top Navigation */}
-      <header className="relative z-50 flex justify-end items-start mb-0">
+      <header className="relative z-50 flex justify-between items-start mb-6">
+        {/* Logo/Brand */}
+        <div className={`
+          px-4 py-2 bg-card border-2 border-border rounded-lg bookmark-shadow
+          ${isDark ? 'font-mono' : 'font-cursive'}
+        `}>
+          <span className="text-lg font-bold">
+            Arkita{isDark ? '.dev' : ' ✨'}
+          </span>
+        </div>
+
         {/* Top Right Controls */}
         <div className="flex items-start gap-4">
           <ThemeToggle />
@@ -40,7 +50,7 @@ const Index = () => {
 
       {/* Main Content */}
       <main className="relative">
-        <HomeSection isDark={isDark} />
+        <ProjectsSection isDark={isDark} />
       </main>
 
       {/* Footer */}
@@ -58,4 +68,4 @@ const Index = () => {
   );
 };
 
-export default Index;
+export default Projects; 

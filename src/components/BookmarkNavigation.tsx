@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { Home, Briefcase, FileText, BookOpen } from 'lucide-react';
 
 interface NavItem {
@@ -15,16 +16,25 @@ const navItems: NavItem[] = [
   { id: 'blog', label: 'Blog', icon: BookOpen, emoji: '📝' },
 ];
 
-interface BookmarkNavigationProps {
-  activeSection: string;
-  onSectionChange: (section: string) => void;
-}
-
-export const BookmarkNavigation = ({ activeSection, onSectionChange }: BookmarkNavigationProps) => {
+export const BookmarkNavigation = () => {
   const [hoveredItem, setHoveredItem] = useState<string | null>(null);
+  const navigate = useNavigate();
+  const location = useLocation();
+  
+  // Determine active section based on current route
+  const getActiveSection = () => {
+    const path = location.pathname;
+    if (path === '/') return 'home';
+    if (path === '/projects') return 'projects';
+    if (path === '/resume') return 'resume';
+    if (path === '/blog') return 'blog';
+    return 'home';
+  };
+  
+  const activeSection = getActiveSection();
 
   return (
-    <div className="fixed right-4 top-1/2 -translate-y-1/2 z-30 flex flex-col gap-2">
+    <div className="absolute right-8 top-1/2 -translate-y-1/2 z-30 flex flex-col gap-2">
       {navItems.map((item) => {
         const isActive = activeSection === item.id;
         const isHovered = hoveredItem === item.id;
@@ -39,7 +49,13 @@ export const BookmarkNavigation = ({ activeSection, onSectionChange }: BookmarkN
           >
             {/* Main bookmark */}
             <button
-              onClick={() => onSectionChange(item.id)}
+              onClick={() => {
+                if (item.id === 'home') {
+                  navigate('/');
+                } else {
+                  navigate(`/${item.id}`);
+                }
+              }}
               className={`
                 relative h-12 transition-all duration-300 ease-out
                 bookmark-nav-clip bookmark-shadow
